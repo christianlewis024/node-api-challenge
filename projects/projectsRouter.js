@@ -51,4 +51,22 @@ router.delete("/:id", (req, res) => {
   const id = req.params.id;
   Projects.remove(id).then(() => res.status(200).json({ message: "deleted" }));
 });
+
+// put
+router.put("/:id", (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  if (!data.name || !data.description) {
+    res.status(400).json({ message: "needs name and description" });
+  } else {
+    Projects.update(id, data).then((post) => {
+      if (post) {
+        res.status(200).json(post);
+      } else {
+        res.status(400).json({ message: "400 - id issue" });
+      }
+    });
+  }
+});
+
 module.exports = router;
