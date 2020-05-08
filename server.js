@@ -5,7 +5,7 @@ const actionsRouter = require("./actions/actionsRouter");
 const projectsRouter = require("./projects/projectsRouter");
 server.use(express.json());
 server.use("/api/actions", actionsRouter, logger);
-server.use("/api/actions", projectsRouter, logger);
+server.use("/api/projects", projectsRouter, logger);
 
 server.get("/", (req, res) => {
   res.send(`API is up and running `);
