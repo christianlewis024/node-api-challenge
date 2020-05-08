@@ -31,4 +31,23 @@ router.delete("/:id", (req, res) => {
   Actions.remove(id).then(() => res.status(200).json({ message: "deleted" }));
 });
 
+// update  / put
+router.put("/:id", (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  if (!data.project_id || !data.description || !data.notes) {
+    res
+      .status(400)
+      .json({ message: "required fields: project id, description, and notes" });
+  } else {
+    Actions.update(id, data).then((action) => {
+      if (action) {
+        res.status(200).json(action);
+      } else {
+        res.status(400).json({ message: "400" });
+      }
+    });
+  }
+});
+
 module.exports = router;
